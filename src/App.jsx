@@ -5,6 +5,7 @@ import Post from "./components/Post";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
+  const postId = 'e6542efc-88ce-4a3f-a2e5-75eebe9b4e22'
   return (
     <>
       <Router>

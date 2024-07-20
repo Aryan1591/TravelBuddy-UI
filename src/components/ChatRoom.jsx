@@ -27,7 +27,7 @@ const ChatRoom = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9002/messages/${postId}`
+          `http://travelbuddy-chat-service-production.up.railway.app:8080/messages/${postId}`
         );
         const messages = response.data.map((item) => ({
           content: item.content,
@@ -38,7 +38,9 @@ const ChatRoom = () => {
         console.error("Error fetching data:", error);
       }
 
-      const socket = new SockJS("http://localhost:9002/ws");
+      const socket = new SockJS(
+        "http://travelbuddy-chat-service-production.up.railway.app:8080/ws"
+      );
       const stompClient = Stomp.over(socket);
 
       stompClient.connect({}, () => {
@@ -54,10 +56,10 @@ const ChatRoom = () => {
           setMessages((prevMessages) => [...prevMessages, newMessage]);
 
           // Scroll to the bottom after adding a new message
-          if (messageListRef.current) {
-            messageListRef.current.scrollTop =
-              messageListRef.current.scrollHeight;
-          }
+          // if (messageListRef.current) {
+          //   messageListRef.current.scrollTop =
+          //     messageListRef.current.scrollHeight;
+          // }
         });
       });
 
@@ -74,6 +76,10 @@ const ChatRoom = () => {
 
     fetchData();
   }, [postId]);
+
+  useEffect(() => {
+    messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+  }, [messages, message]);
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
