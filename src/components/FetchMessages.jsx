@@ -10,7 +10,7 @@ const FetchMessages = ({ roomId }) => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get(`http://travelbuddy-chat-service-production.up.railway.app/messages/${roomId}`);
+        const response = await axios.get(`https://travelbuddy-chat-service-production.up.railway.app/messages/${roomId}`);
         setMessages(response.data);
       } catch (error) {
         setError('Failed to fetch messages.');

@@ -18,7 +18,7 @@ const OnlineUserList = ({ roomId }) => {
     const fetchOnlineUsers = async () => {
       try {
         const response = await axios.get(
-          `http://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}`
+          `https://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}`
         );
         setOnlineUsers(response.data);
       } catch (error) {
@@ -29,7 +29,7 @@ const OnlineUserList = ({ roomId }) => {
     const addUserToRoom = async () => {
       try {
         await axios.post(
-          `http://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}/addUser`,
+          `https://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}/addUser`,
           username
         );
         fetchOnlineUsers();
@@ -41,7 +41,7 @@ const OnlineUserList = ({ roomId }) => {
     const removeUserFromRoom = async () => {
       try {
         await axios.delete(
-          `http://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}/removeUser`,
+          `https://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}/removeUser`,
           username
         );
       } catch (error) {

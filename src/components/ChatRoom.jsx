@@ -14,8 +14,8 @@ import Stomp from "stompjs";
 import OnlineUserList from "./OnLineUserList";
 import SendIcon from "@mui/icons-material/Send";
 
-const ChatRoom = () => {
-  const { postId } = useParams();
+ const ChatRoom = ({postId}) => {
+//   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [stompClient, setStompClient] = useState(null);
@@ -27,7 +27,7 @@ const ChatRoom = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://travelbuddy-chat-service-production.up.railway.app/messages/${postId}`
+          `https://travelbuddy-chat-service-production.up.railway.app/messages/${postId}`
         );
         const messages = response.data.map((item) => ({
           content: item.content,
@@ -39,7 +39,7 @@ const ChatRoom = () => {
       }
 
       const socket = new SockJS(
-        "http://travelbuddy-chat-service-production.up.railway.app/ws"
+        "https://travelbuddy-chat-service-production.up.railway.app/ws"
       );
       const stompClient = Stomp.over(socket);
 
