@@ -18,7 +18,7 @@ const OnlineUserList = ({ roomId }) => {
     const fetchOnlineUsers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9002/onlineUsers/${roomId}`
+          `http://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}`
         );
         setOnlineUsers(response.data);
       } catch (error) {
@@ -29,7 +29,7 @@ const OnlineUserList = ({ roomId }) => {
     const addUserToRoom = async () => {
       try {
         await axios.post(
-          `http://localhost:9002/onlineUsers/${roomId}/addUser`,
+          `http://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}/addUser`,
           username
         );
         fetchOnlineUsers();
@@ -41,7 +41,7 @@ const OnlineUserList = ({ roomId }) => {
     const removeUserFromRoom = async () => {
       try {
         await axios.delete(
-          `http://localhost:9002/onlineUsers/${roomId}/removeUser`,
+          `http://travelbuddy-chat-service-production.up.railway.app/onlineUsers/${roomId}/removeUser`,
           username
         );
       } catch (error) {
@@ -66,7 +66,7 @@ const OnlineUserList = ({ roomId }) => {
         width: "18vw",
         overflow: "hidden",
         position: "relative",
-        backgroundColor: "#2e3b55", 
+        backgroundColor: "#2e3b55",
         color: "#fff",
       }}
     >
@@ -82,9 +82,9 @@ const OnlineUserList = ({ roomId }) => {
         sx={{
           height: "calc(100% - 4rem)",
           overflowY: "scroll",
-          scrollbarWidth: "none", 
+          scrollbarWidth: "none",
           "&::-webkit-scrollbar": {
-            display: "none", 
+            display: "none",
           },
         }}
       >
