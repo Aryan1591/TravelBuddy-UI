@@ -19,7 +19,7 @@ const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [stompClient, setStompClient] = useState(null);
-  const username = "Avishekh"; // This should ideally be dynamically set based on logged-in user
+  const username = "Deva"; // This should ideally be dynamically set based on logged-in user
 
   const messageListRef = useRef(null); // Reference to the message list container
 
@@ -27,7 +27,7 @@ const ChatRoom = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://travelbuddy-chat-service-production.up.railway.app:8080/messages/${postId}`
+          `http://travelbuddy-chat-service-production.up.railway.apps/messages/${postId}`
         );
         const messages = response.data.map((item) => ({
           content: item.content,
@@ -39,7 +39,7 @@ const ChatRoom = () => {
       }
 
       const socket = new SockJS(
-        "http://travelbuddy-chat-service-production.up.railway.app:8080/ws"
+        "http://travelbuddy-chat-service-production.up.railway.app/ws"
       );
       const stompClient = Stomp.over(socket);
 
