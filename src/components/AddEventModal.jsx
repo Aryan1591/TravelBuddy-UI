@@ -60,7 +60,6 @@ const AddEventModal = ({ open, handleClose, post, handleSave }) => {
   const handleAddEventDetail = () => {
     if (eventDetails.length < 4) {
       // Restrict to 4 events per day
-      console.log("Event added " + event);
       setEventDetails([...eventDetails, { event: "" }]);
     }
   };
@@ -88,7 +87,12 @@ const AddEventModal = ({ open, handleClose, post, handleSave }) => {
     }
     return options;
   };
-  const isSaveDisabled = eventDetails[0].event.trim() === "";
+
+  const isSaveDisabled =
+    !date ||
+    !title.trim() ||
+    eventDetails.length === 0 ||
+    eventDetails.some((detail) => detail.event.trim() === "");
 
   return (
     <Modal open={open} onClose={handleClose}>

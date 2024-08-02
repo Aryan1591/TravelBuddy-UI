@@ -8,54 +8,52 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import axios from "axios";
+import SockJS from "sockjs-client/dist/sockjs";
+import Stomp from "stompjs";
 
-const OnlineUserList = ({ roomId }) => {
+const OnlineUserList = ({ roomId, username }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const username = "Avishekh";
+  console.log("roomId " + roomId + "  " + "username " + username);
 
   useEffect(() => {
-    const fetchOnlineUsers = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:9002/onlineUsers/${roomId}`
+    const socket = new SockJS(
+      "https://travelbuddy-chat-service-production.up.railway.app/ws"
+    );
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, () => {
+      // Subscribe to the active users topic for the room
+      stompClient.subscribe(`/topic/${roomId}/active-users`, (message) => {
+        setOnlineUsers(JSON.parse(message.body));
+      });
+
+      // Notify the backend that the user has joined the room
+      stompClient.send(
+        `/app/chat/join`,
+        {},
+        JSON.stringify({ roomId, username })
+      );
+
+      window.addEventListener("beforeunload", () => {
+        stompClient.send(
+          "/app/chat/leave",
+          {},
+          JSON.stringify({ roomId, username })
         );
-        setOnlineUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching online users:", error);
-      }
-    };
-
-    const addUserToRoom = async () => {
-      try {
-        await axios.post(
-          `http://localhost:9002/onlineUsers/${roomId}/addUser`,
-          username
-        );
-        fetchOnlineUsers();
-      } catch (error) {
-        console.error("Error adding user to room:", error);
-      }
-    };
-
-    const removeUserFromRoom = async () => {
-      try {
-        await axios.delete(
-          `http://localhost:9002/onlineUsers/${roomId}/removeUser`,
-          username
-        );
-      } catch (error) {
-        console.error("Error removing user from room:", error);
-      }
-    };
-
-    addUserToRoom();
-
-    window.addEventListener("beforeunload", removeUserFromRoom);
+        stompClient.disconnect();
+      });
+    });
 
     return () => {
-      removeUserFromRoom();
-      window.removeEventListener("beforeunload", removeUserFromRoom);
+      if (stompClient) {
+        // Notify the backend that the user has left the room
+        stompClient.send(
+          `/app/chat/leave`,
+          {},
+          JSON.stringify({ roomId, username })
+        );
+        stompClient.disconnect();
+      }
     };
   }, [roomId, username]);
 
@@ -66,11 +64,10 @@ const OnlineUserList = ({ roomId }) => {
         width: "18vw",
         overflow: "hidden",
         position: "relative",
-        backgroundColor: "#2e3b55", 
+        backgroundColor: "#2e3b55",
         color: "#fff",
       }}
     >
-      {}
       <Typography
         variant="h6"
         component="h2"
@@ -82,9 +79,9 @@ const OnlineUserList = ({ roomId }) => {
         sx={{
           height: "calc(100% - 4rem)",
           overflowY: "scroll",
-          scrollbarWidth: "none", 
+          scrollbarWidth: "none",
           "&::-webkit-scrollbar": {
-            display: "none", 
+            display: "none",
           },
         }}
       >

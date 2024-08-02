@@ -8,10 +8,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<Post />} />
-          <Route path="/chat/:postId" element={<ChatRoom />} />
-        </Routes>
+        <Routes></Routes>
       </Router>
     </>
   );

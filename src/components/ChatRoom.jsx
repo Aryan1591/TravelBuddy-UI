@@ -14,8 +14,8 @@ import Stomp from "stompjs";
 import OnlineUserList from "./OnLineUserList";
 import SendIcon from "@mui/icons-material/Send";
 
-const ChatRoom = () => {
-  const { postId } = useParams();
+const ChatRoom = ({ postId }) => {
+  //   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [stompClient, setStompClient] = useState(null);
@@ -27,7 +27,7 @@ const ChatRoom = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9002/messages/${postId}`
+          `https://travelbuddy-chat-service-production.up.railway.app/messages/${postId}`
         );
         const messages = response.data.map((item) => ({
           content: item.content,
@@ -38,7 +38,9 @@ const ChatRoom = () => {
         console.error("Error fetching data:", error);
       }
 
-      const socket = new SockJS("http://localhost:9002/ws");
+      const socket = new SockJS(
+        "https://travelbuddy-chat-service-production.up.railway.app/ws"
+      );
       const stompClient = Stomp.over(socket);
 
       stompClient.connect({}, () => {
@@ -52,12 +54,6 @@ const ChatRoom = () => {
           };
 
           setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-          // Scroll to the bottom after adding a new message
-          if (messageListRef.current) {
-            messageListRef.current.scrollTop =
-              messageListRef.current.scrollHeight;
-          }
         });
       });
 
@@ -74,6 +70,10 @@ const ChatRoom = () => {
 
     fetchData();
   }, [postId]);
+
+  useEffect(() => {
+    messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+  }, [messages, message]);
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
@@ -106,7 +106,7 @@ const ChatRoom = () => {
         width: "100vw",
       }}
     >
-      <OnlineUserList roomId={postId} />
+      <OnlineUserList roomId={postId} username={username} />
 
       <Box
         sx={{
