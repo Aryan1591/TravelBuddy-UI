@@ -78,8 +78,8 @@ const AddEventModal = ({ open, handleClose, post, handleSave }) => {
 
   const generateDateOptions = () => {
     const options = [];
-    const fromDate = new Date(post.fromDate);
-    const toDate = new Date(post.toDate);
+    const fromDate = new Date(post.startDate);
+    const toDate = new Date(post.endDate);
     let currentDate = fromDate;
     while (currentDate <= toDate) {
       options.push(currentDate.toISOString().split("T")[0]);

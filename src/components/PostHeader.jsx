@@ -22,14 +22,14 @@ const PostHeader = ({ post }) => {
         >{`Destination: ${post.destination}`}</Typography>
       </MiddleSection>
       <RightSection>
-        <Typography variant="body1">{post.fromDate}</Typography>
+        <Typography variant="body1">{post.startDate}</Typography>
         <Typography
           variant="body1"
           sx={{ marginLeft: "0.5em", marginRight: "0.5em" }}
         >
           to
         </Typography>
-        <Typography variant="body1">{post.toDate}</Typography>
+        <Typography variant="body1">{post.endDate}</Typography>
       </RightSection>
     </HeaderContainer>
   );
