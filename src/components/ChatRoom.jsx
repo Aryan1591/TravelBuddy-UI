@@ -14,12 +14,12 @@ import Stomp from "stompjs";
 import OnlineUserList from "./OnLineUserList";
 import SendIcon from "@mui/icons-material/Send";
 
-const ChatRoom = ({ postId }) => {
-  //   const { postId } = useParams();
+const ChatRoom = () => {
+  const { postId } = useParams();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [stompClient, setStompClient] = useState(null);
-  const username = "Avishekh"; // This should ideally be dynamically set based on logged-in user
+  const username = sessionStorage.getItem("username"); // This should ideally be dynamically set based on logged-in user
 
   const messageListRef = useRef(null); // Reference to the message list container
 
@@ -27,7 +27,7 @@ const ChatRoom = ({ postId }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://travelbuddy-chat-service-production.up.railway.app/messages/${postId}`
+          `http://localhost:9002/messages/${postId}`
         );
         const messages = response.data.map((item) => ({
           content: item.content,
@@ -38,9 +38,7 @@ const ChatRoom = ({ postId }) => {
         console.error("Error fetching data:", error);
       }
 
-      const socket = new SockJS(
-        "https://travelbuddy-chat-service-production.up.railway.app/ws"
-      );
+      const socket = new SockJS("http://localhost:9002/ws");
       const stompClient = Stomp.over(socket);
 
       stompClient.connect({}, () => {

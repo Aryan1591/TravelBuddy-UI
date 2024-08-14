@@ -16,9 +16,7 @@ const OnlineUserList = ({ roomId, username }) => {
   console.log("roomId " + roomId + "  " + "username " + username);
 
   useEffect(() => {
-    const socket = new SockJS(
-      "https://travelbuddy-chat-service-production.up.railway.app/ws"
-    );
+    const socket = new SockJS("http://localhost:9002/ws");
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({}, () => {

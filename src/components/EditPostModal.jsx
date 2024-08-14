@@ -10,11 +10,11 @@ import {
   Grid,
 } from "@mui/material";
 
-const calculateDays = (fromDate, toDate) => {
-  const start = new Date(fromDate);
-  const end = new Date(toDate);
+const calculateDays = (startDate, endDate) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
   const timeDiff = end - start;
-  const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+  const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
   return daysDiff;
 };
 
@@ -35,15 +35,15 @@ const EditPostModal = ({ open, handleClose, post, handleSave }) => {
     // Enable Save button only if all fields are valid
     const isValid =
       updatedPost.title &&
-      updatedPost.fromDate &&
-      updatedPost.toDate &&
+      updatedPost.startDate &&
+      updatedPost.endDate &&
       updatedPost.source &&
-      updatedPost.budget > 0 &&
-      new Date(updatedPost.fromDate) < new Date(updatedPost.toDate) &&
-      new Date(updatedPost.toDate) <=
+      updatedPost.amount > 0 &&
+      new Date(updatedPost.startDate) < new Date(updatedPost.endDate) &&
+      new Date(updatedPost.endDate) <=
         new Date(
-          new Date(updatedPost.fromDate).setDate(
-            new Date(updatedPost.fromDate).getDate() + 7
+          new Date(updatedPost.startDate).setDate(
+            new Date(updatedPost.startDate).getDate() + 7
           )
         );
     setIsSaveEnabled(isValid);
@@ -55,7 +55,7 @@ const EditPostModal = ({ open, handleClose, post, handleSave }) => {
 
   const handleSaveChanges = () => {
     // Calculate days and nights
-    const days = calculateDays(updatedPost.fromDate, updatedPost.toDate);
+    const days = calculateDays(updatedPost.startDate, updatedPost.endDate);
     const nights = days - 1;
 
     // Update the post with days and nights
@@ -75,11 +75,11 @@ const EditPostModal = ({ open, handleClose, post, handleSave }) => {
   };
 
   const today = new Date().toISOString().split("T")[0];
-  const maxDate = new Date(updatedPost.fromDate);
+  const maxDate = new Date(updatedPost.startDate);
   maxDate.setDate(maxDate.getDate() + 7);
   const maxDateStr = maxDate.toISOString().split("T")[0];
 
-  const days = calculateDays(updatedPost.fromDate, updatedPost.toDate);
+  const days = calculateDays(updatedPost.startDate, updatedPost.endDate);
   const nights = days - 1;
 
   return (
@@ -102,8 +102,8 @@ const EditPostModal = ({ open, handleClose, post, handleSave }) => {
               label="From"
               type="date"
               fullWidth
-              value={updatedPost.fromDate}
-              onChange={(e) => handleChange("fromDate", e.target.value)}
+              value={updatedPost.startDate}
+              onChange={(e) => handleChange("startDate", e.target.value)}
               margin="normal"
               InputLabelProps={{ shrink: true }}
               inputProps={{ min: today }}
@@ -114,12 +114,12 @@ const EditPostModal = ({ open, handleClose, post, handleSave }) => {
               label="To"
               type="date"
               fullWidth
-              value={updatedPost.toDate}
-              onChange={(e) => handleChange("toDate", e.target.value)}
+              value={updatedPost.endDate}
+              onChange={(e) => handleChange("endDate", e.target.value)}
               margin="normal"
               InputLabelProps={{ shrink: true }}
               inputProps={{
-                min: updatedPost.fromDate,
+                min: updatedPost.startDate,
                 max: maxDateStr,
               }}
             />
@@ -156,8 +156,8 @@ const EditPostModal = ({ open, handleClose, post, handleSave }) => {
           label="Budget"
           type="number"
           fullWidth
-          value={updatedPost.budget}
-          onChange={(e) => handleChange("budget", e.target.value)}
+          value={updatedPost.amount}
+          onChange={(e) => handleChange("amount", e.target.value)}
           margin="normal"
         />
       </DialogContent>

@@ -6,12 +6,12 @@ import { styled } from "@mui/system";
 
 const UserInfoBox = ({ username, onClose }) => {
   const [userInfo, setUserInfo] = useState(null);
-
+  console.log("received username is " + username);
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9001/getInfo/${username}`
+          `http://localhost:8092/users/getInfo/${username}`
         );
         setUserInfo(response.data);
       } catch (error) {
