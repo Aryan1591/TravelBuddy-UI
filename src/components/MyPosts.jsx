@@ -1,7 +1,7 @@
 // src/MyPosts.jsx
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button, CircularProgress } from "@mui/material";
-import TripCard from "./TripCard"; // Ensure TripCard is imported
+import TripCard from "./Post/TripCard"; // Ensure TripCard is imported
 import axios from "axios";
 
 const MyPosts = () => {

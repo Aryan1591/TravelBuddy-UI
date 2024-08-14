@@ -4,11 +4,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
 import NavigationBar from "./NavigationBar";
 import Sidebar from "./Sidebar";
-import MyPosts from "./MyPosts";
+import MyPosts from "../MyPosts";
 import RightSidebar from "./RightSidebar";
-import AboutMe from "./AboutMe";
-import ChangePassword from "./ChangePassword";
-import CreatePost from "./CreatePost";
+import AboutMe from "../User/AboutMe";
+import ChangePassword from "../User/ChangePassword";
+import CreatePost from "../Post/CreatePost";
 import Home from "./Home"; // Import the Home component
 import axios from "axios";
 

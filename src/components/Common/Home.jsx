@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import axios from "axios";
-import TripCard from "./TripCard";
+import TripCard from "../Post/TripCard";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);

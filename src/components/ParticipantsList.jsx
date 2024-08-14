@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { styled } from "@mui/system";
-import UserInfoBox from "./UserInfoBox";
+import UserInfoBox from "./User/UserInfoBox";
 
 const ParticipantsList = ({ participants }) => {
   const [selectedUser, setSelectedUser] = useState(null);

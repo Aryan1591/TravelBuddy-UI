@@ -6,10 +6,10 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Home from "./components/HomePage";
-import Post from "./components/Post";
+import Login from "./components/Common/Login";
+import Signup from "./components/Common/Signup";
+import Home from "./components/Common/HomePage";
+import Post from "./components/Post/Post";
 import ChatRoom from "./components/ChatRoom";
 import ProtectedRoute from "./components/Security/ProtectedRoute"; // Ensure correct path
 

@@ -179,6 +179,7 @@ const TripCard = ({ data }) => {
       <JoinButton
         variant="contained"
         onClick={isUserInPost ? handleGoToPostClick : handleJoinClick}
+        disabled={ !isUserInPost && data.status === "LOCKED"}
       >
         {isUserInPost ? "Go To Post" : "Join Post"}
       </JoinButton>

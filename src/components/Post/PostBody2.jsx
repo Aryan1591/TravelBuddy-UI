@@ -16,12 +16,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ChatIcon from "@mui/icons-material/Chat";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import ParticipantsList from "./ParticipantsList";
-import EventsTimeline from "./EventsTimeline";
+import ParticipantsList from "../ParticipantsList";
+import EventsTimeline from "../Post/EventsTimeline";
 import { useNavigate } from "react-router-dom";
-import AddEventModal from "./AddEventModal";
-import EditPostModal from "./EditPostModal";
-import PostHeader from "./PostHeader";
+import AddEventModal from "../Post/AddEventModal";
+import EditPostModal from "../Post/EditPostModal";
+import PostHeader from "../Post/PostHeader";
 
 const PostBody2 = ({ postId }) => {
   const navigate = useNavigate();

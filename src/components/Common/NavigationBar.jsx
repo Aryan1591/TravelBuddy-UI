@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Box, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import TravelBuddyLogo from './travel_buddy_logo.png';
+import TravelBuddyLogo from '../travel_buddy_logo.png';
 
 const NavigationBar = ({ username, onCreatePost }) => {
   return (
