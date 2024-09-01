@@ -130,7 +130,7 @@ const TripCard = ({ data }) => {
   const handleConfirmJoin = async () => {
     try {
       await axios.post(
-        `http://localhost:8093/post/addUser/${username}/${data.id}`
+        `https://travelbuddy-posts-service-production.up.railway.app/post/addUser/${username}/${data.id}`
       );
       setOpenDialog(false);
       navigate(`/post/${data.id}`);

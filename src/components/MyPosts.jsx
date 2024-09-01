@@ -26,7 +26,7 @@ const MyPosts = () => {
     const initializePosts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8092/userPosts/getPostIdsOfUser/${username}`
+          `https://travelbuddy-user-service-production.up.railway.app/userPosts/getPostIdsOfUser/${username}`
         );
 
         const ids = response.data;
@@ -63,7 +63,7 @@ const MyPosts = () => {
       // Fetch post details from the API
       const postDetails = await Promise.all(
         currentPostIds.map((id) =>
-          axios.get(`http://localhost:8093/post/${id}`)
+          axios.get(`https://travelbuddy-posts-service-production.up.railway.app/post/${id}`)
         )
       );
 

@@ -62,7 +62,7 @@ const ChangePassword = ({ handleClose, username }) => {
   const onSubmit = async (data) => {
     try {
       await axios.post(
-        `http://localhost:8092/users/changePassword/${username}`,
+        `https://travelbuddy-user-service-production.up.railway.app/users/changePassword/${username}`,
         {
           currentPassword: data.currentPassword,
           newPassword: data.newPassword,

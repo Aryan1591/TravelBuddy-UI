@@ -50,7 +50,7 @@ const Signup = () => {
     }
 
     try {
-      await axios.post("http://localhost:8092/users/register", data);
+      await axios.post("https://travelbuddy-user-service-production.up.railway.app/users/register", data);
       setSuccessMessage('Registration Successful');
       setApiError('');
     } catch (err) {

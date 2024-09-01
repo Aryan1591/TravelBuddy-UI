@@ -66,7 +66,7 @@ const HomePage = () => {
     console.log(newPosts);
     try {
       const response = await axios.post(
-        "http://localhost:8093/post/createPost",
+        "https://travelbuddy-posts-service-production.up.railway.app/post/createPost",
         newPosts
       );
       console.log(response.data);

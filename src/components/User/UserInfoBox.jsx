@@ -11,7 +11,7 @@ const UserInfoBox = ({ username, onClose }) => {
     const fetchUserInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8092/users/getInfo/${username}`
+          `https://travelbuddy-user-service-production.up.railway.app/users/getInfo/${username}`
         );
         setUserInfo(response.data);
       } catch (error) {

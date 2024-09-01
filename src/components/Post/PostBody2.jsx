@@ -57,7 +57,7 @@ const PostBody2 = ({ postId }) => {
   const handleConfirmDelete = async () => {
     // Call backend API to delete the post
     try {
-      await axios.delete(`http://localhost:8093/post/${postId}`);
+      await axios.delete(`https://travelbuddy-posts-service-production.up.railway.app/post/${postId}`);
       navigate("/home"); // Redirect to the home page after deletion
     } catch (error) {
       console.error("Error deleting the post", error);
@@ -87,7 +87,7 @@ const PostBody2 = ({ postId }) => {
     // TODO: Call backend API to save changes to the post
     try {
       const modifiedresponse = await axios.put(
-        `http://localhost:8093/post/${updatedPost.id}`,
+        `https://travelbuddy-posts-service-production.up.railway.app/post/${updatedPost.id}`,
         newPostDetails
       );
       console.log("Post updated successfully");
@@ -113,7 +113,7 @@ const PostBody2 = ({ postId }) => {
   const handleConfirmLeave = async () => {
     try {
       await axios.delete(
-        `http://localhost:8093/post/removeUser/${currentUser}/${updatedPost.id}`
+        `https://travelbuddy-posts-service-production.up.railway.app/post/removeUser/${currentUser}/${updatedPost.id}`
       );
       navigate("/home"); // Redirect to the home page after leaving
     } catch (error) {
@@ -127,7 +127,7 @@ const PostBody2 = ({ postId }) => {
 
     try {
       await axios.put(
-        `http://localhost:8093/post/${updatedPost.id}`,
+        `https://travelbuddy-posts-service-production.up.railway.app/post/${updatedPost.id}`,
         updatedPostWithEvents
       );
       console.log("Post updated successfully");
@@ -140,7 +140,7 @@ const PostBody2 = ({ postId }) => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8093/post/${postId}`
+          `https://travelbuddy-posts-service-production.up.railway.app/post/${postId}`
         );
         setUpdatedPost(response.data); // Set the updated post data to state
         console.log("Post Object's data is");

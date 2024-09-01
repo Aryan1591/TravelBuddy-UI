@@ -48,7 +48,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8092/users/login",
+        "https://travelbuddy-user-service-production.up.railway.app/users/login",
         data
       );
 

@@ -34,7 +34,7 @@ const AboutMe = ({ username }) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`http://localhost:8092/users/getInfo/${username}`);
+        const response = await axios.get(`https://travelbuddy-user-service-production.up.railway.app/users/getInfo/${username}`);
         const userInfo = response.data;
 
         // Set form values
@@ -57,7 +57,7 @@ const AboutMe = ({ username }) => {
   const onSubmit = async (data) => {
     setUpdating(true);
     try {
-      await axios.put(`http://localhost:8092/users/updateInfo/${username}`, {
+      await axios.put(`https://travelbuddy-user-service-production.up.railway.app/users/updateInfo/${username}`, {
         ...data,
         phnum_visibility: data.showPhoneNumber // Send showPhoneNumber as phnum_visibility
       });
@@ -74,7 +74,7 @@ const AboutMe = ({ username }) => {
   const handleDeleteAccount = async () => {
     setDeleting(true);
     try {
-      await axios.delete(`http://localhost:8092/users/deleteAccount/${username}`);
+      await axios.delete(`https://travelbuddy-user-service-production.up.railway.app/users/deleteAccount/${username}`);
       setSuccessMessage('Account deleted successfully');
       setApiError('');
       // Optionally, you can add code here to redirect the user or clear user data from local state/storage

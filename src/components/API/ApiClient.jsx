@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export const apiClient = axios.create(
     {
-        baseURL: 'http://localhost:8092'
+        baseURL: 'https://travelbuddy-user-service-production.up.railway.app/'
     }
 );

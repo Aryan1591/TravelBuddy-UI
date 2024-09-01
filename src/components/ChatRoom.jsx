@@ -28,7 +28,7 @@ const ChatRoom = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9002/messages/${postId}`
+          `https://travelbuddy-chat-service-production-af8a.up.railway.app/messages/${postId}`
         );
         const messages = response.data.map((item) => ({
           content: item.content,
@@ -39,7 +39,7 @@ const ChatRoom = () => {
         console.error("Error fetching data:", error);
       }
 
-      const socket = new SockJS("http://localhost:9002/ws");
+      const socket = new SockJS("https://travelbuddy-chat-service-production-af8a.up.railway.app/ws");
       const stompClient = Stomp.over(socket);
 
       stompClient.connect({}, () => {

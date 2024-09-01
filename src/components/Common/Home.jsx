@@ -18,12 +18,12 @@ const Home = () => {
       setError(null);
       try {
         // Fetch total count of posts
-        const countResponse = await axios.get("http://localhost:8093/post/getPostsCount");
+        const countResponse = await axios.get("https://travelbuddy-posts-service-production.up.railway.app/post/getPostsCount");
         const totalCount = countResponse.data;
         setTotalPages(Math.ceil(totalCount / postsPerPage));
 
         // Fetch posts for the current page
-        const postsResponse = await axios.get("http://localhost:8093/post/allPosts", {
+        const postsResponse = await axios.get("https://travelbuddy-posts-service-production.up.railway.app/post/allPosts", {
           params: {
             page: currentPage - 1, // Page parameter is 0-based
             size: postsPerPage
